@@ -19,7 +19,7 @@ wofi_command="wofi --show dmenu \
 			
 # Mostrar posibles entradas por pantalla
 
-entries=$(echo -e "Atajos\nInterfaz\nFullFocus\nTareas\nTerminal\nCamara\nArchivos\nFirefox\nBuscadorInternet\nBuscadorLocal\nSistema\nDisco\nSpotify\nWhatsApp\nDiscord\nJuegos\nMoodle\nXampp\nParticiones\nNvim\nYoutube\nTor\nCalculadora\nCalendario\nWeather\nEditorVideo\nTwitch\nTwitter\nGitHub\nWikipedia\nChatGPT\nOneDrive\nOutlook\nGmail\nDrive\nWallpapers\nCaptura\nAntivirus\nVpn_On\nVpn_Off\nDocumentos\nCCleaner\nVisual_Studio\nVLC\nWiFi\nBluetooth_On\nBluetooth_Off\nBluetooth_Info\nEditar" | $wofi_command -i --dmenu | awk '{print tolower($1)}')
+entries=$(echo -e "Atajos\nInterfaz\nColorPicker\nReloj\nTareas\nPortafolios\nPomodoro\nContador\nCode\nTrivial\nAdminTareas\nTerminal\nCamara\nArchivos\nFirefox\nBuscadorInternet\nBuscadorLocal\nSistema\nDisco\nSpotify\nWhatsApp\nDiscord\nJuegos\nMoodle\nXampp\nLMStudio_LocalIA\nParticiones\nNvim\nYoutube\nTor\nCalculadora\nCalendario\nWeather\nEditorVideo\nTwitch\nTwitter\nGitHub\nWikipedia\nChatGPT\nOneDrive\nOutlook\nGmail\nDrive\nWallpapers\nCaptura\nAntivirus\nVpn_On\nVpn_Off\nDocumentos\nCCleaner\nVisualStudio\nVLC\nWiFi\nBluetooth_On\nBluetooth_Off\nBluetooth_Info\nEditar" | $wofi_command -i --dmenu | awk '{print tolower($1)}')
 
 # Dependencias: zenity; hyprshot; gnome-system-monitor; kamoso; filelight; wine; waypaper; bleachbit; 
 
@@ -46,28 +46,50 @@ Meta + I = Color Hypr
 Meta + A = Crear Agrupacion
 Meta + D = Desagrupar
 Meta + G = Agrandar ventana
-Meta + TAB = Escritorios
+Meta + TAB = Escritorios (bug)
 Meta + H = Horizontal
 Meta + V = Vertical	
-Meta + F1-F3 = Abrir Stickers
-Meta + F4 = Cerrar Stickers
-Meta + F5-F6 = Sonidos
+Meta + F1 = Reloj
+Meta + F2 = Calendario
+Meta + F3 = Calculadora
+Meta + F4 = Pomodoro
+Meta + F5-F7 = Abrir Stickers
+Meta + F8 = Cerrar Stickers
 Meta + F9 = Reduce Brillo
 Meta + F10 = Augmenta Brillo
+Meta + F11 = EasterEgg
 Meta + F12 = Brillo 0
 Meta + Audio = Todas las opciones"
 	;;
     interfaz)
 	python3 interfaz.py
 	;;
-    fullfocus)
-	./full_focus.sh
+    colorpicker)
+	flatpak run io.github.josephmawa.Bella
 	;;
     tareas)
+    flatpak run dev.edfloreshz.Tasks
+    ;;
+    reloj)
+    flatpak run re.sonny.Retro
+    ;;
+    pomodoro)
+    flatpak run org.gnome.Solanum
+    ;;
+    contador)
+    flatpak run ca.vlacroix.Tally
+    ;;
+    trivial)
+    flatpak run io.github.nokse22.trivia-quiz
+    ;;
+    admintareas)
 	gnome-system-monitor
 	;;
     terminal)
         terminology 
+        ;;
+    code)
+        code
         ;;
     camara)
         kamoso
@@ -92,7 +114,10 @@ Meta + Audio = Todas las opciones"
 	filelight
 	;;
     spotify)
-        spotify
+        firefox https://open.spotify.com/intl-es
+        ;;
+    portafolios)
+        firefox https://garcilaso05.github.io/portafolios/
         ;;
     whatsapp)
         firefox https://web.whatsapp.com/
@@ -111,10 +136,11 @@ gomoku
 robots
 snake
 pacman4console
+trivial
 cmatriz o nyancat o asciiquarium (WIND+M)"
 	;;
     moodle)
-        firefox https://campusvirtual.urv.cat/my/
+        firefox
         ;;
     youtube)
         firefox https://www.youtube.com/
@@ -133,6 +159,9 @@ Iniciar servidor (mysql):
 
         sudo /opt/lampp/bin/mysql -u root"
 	;;
+    lmstudio_localia)
+        /home/blackhole/LM-Studio-0.3.9-6-x64.AppImage
+	;;
     particiones)
 
 	zenity --info --title="Administrar Particiones" --text="Abrir gparted:
@@ -149,7 +178,7 @@ sudo -H nano /etc/fstab"
 	kitty nvim
 	;;
     calculadora)
-        wine /home/blackhole/Windows/QalculatePortable/QalculatePortable.exe
+        flatpak run org.gnome.Calculator
         ;;
     calendario)
         gnome-calendar
@@ -211,7 +240,7 @@ sudo -H nano /etc/fstab"
     ccleaner)
         bleachbit
         ;;
-    visual_studio)
+    visualstudio)
         code
         ;;
     vlc)
